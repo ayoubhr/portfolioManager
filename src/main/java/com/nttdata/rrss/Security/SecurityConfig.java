@@ -48,9 +48,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/users/find-users").hasAnyAuthority("ROLE_USER");
 		
 		// portfolio routes
-		http.authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/portfolios/**").permitAll();
-		http.authorizeHttpRequests().antMatchers(HttpMethod.POST, "/api/portfolios/**").permitAll();
-		http.authorizeHttpRequests().antMatchers(HttpMethod.DELETE, "/api/portfolios/**").permitAll();
+		http.authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/portfolios/**").hasAnyAuthority("ROLE_USER");
+		http.authorizeHttpRequests().antMatchers(HttpMethod.POST, "/api/portfolios/**").hasAnyAuthority("ROLE_USER");
+		http.authorizeHttpRequests().antMatchers(HttpMethod.DELETE, "/api/portfolios/**").hasAnyAuthority("ROLE_USER");
 		
 		// reaction routes
 		http.authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/reactions/**").hasAnyAuthority("ROLE_USER");
@@ -62,7 +62,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 		http.cors();
-		
 	}
 
 	@Bean

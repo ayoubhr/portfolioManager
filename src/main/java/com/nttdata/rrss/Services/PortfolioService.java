@@ -1,7 +1,12 @@
 package com.nttdata.rrss.Services;
 
 import com.nttdata.rrss.Entity.PortfolioEntity;
+import com.nttdata.rrss.Entity.ReactionEntity;
+import com.nttdata.rrss.Entity.UserEntity;
 import com.nttdata.rrss.Repository.PortfolioRepository;
+import com.nttdata.rrss.Repository.ReactionRepository;
+import com.nttdata.rrss.Repository.UserRepository;
+import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -10,9 +15,13 @@ import java.util.*;
 public class PortfolioService {
 
     private final PortfolioRepository portfolioRepository;
+    private final UserRepository userRepository;
+    private final ReactionRepository reactionRepository;
 
-    public PortfolioService(PortfolioRepository portfolioRepository) {
+    public PortfolioService(PortfolioRepository portfolioRepository, UserRepository userRepository, ReactionRepository reactionRepository) {
         this.portfolioRepository = portfolioRepository;
+        this.userRepository = userRepository;
+        this.reactionRepository = reactionRepository;
     }
 
     public HashMap<String, String> savePortfolio(Map<String, Object> payload) throws Exception {
@@ -65,5 +74,27 @@ public class PortfolioService {
 
     public void deletePortfolioByAuthor(Long author) {
         portfolioRepository.deleteByAuthor(author);
+    }
+
+    public List<Object> portfolioReactions(Long id) throws JSONException {
+        Optional<UserEntity> u = userRepository.findById(id);
+        UserEntity user = u.get();
+
+        List<PortfolioEntity> ports = portfolioRepository.findAll();
+
+        List<Object> objList = new ArrayList<>();
+
+        for(PortfolioEntity port: ports) {
+            HashMap<String, Object> objectNode = new HashMap<String, Object>();
+
+            List<ReactionEntity> reactions = reactionRepository.findByUserAndPublication(id, port.getId());
+
+            objectNode.put("user_id", user.getId());
+            objectNode.put("portfolio", port.getId());
+            objectNode.put("reactions", reactions);
+
+            objList.add(objectNode);
+        }
+        return objList;
     }
 }
