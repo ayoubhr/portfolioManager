@@ -1,20 +1,12 @@
 package com.nttdata.rrss.Entity;
 
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-
-import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
 
 @Data
 @Entity
@@ -50,7 +42,7 @@ public class UserEntity {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@Column(name="roles")
 	private Collection<Role> roles = new ArrayList<>();
-	
+
 	public UserEntity() {
 	}
 }

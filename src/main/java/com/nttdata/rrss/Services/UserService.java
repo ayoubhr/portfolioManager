@@ -49,8 +49,8 @@ public class UserService implements UserDetailsService {
 			for (int i = 0; i < 1; i++) {
 				user.setAvatar((String) payload.get("avatar"));
 				user.setEmail((String) payload.get("email"));
-				user.setLastName((String) payload.get("lastname"));
-				user.setUserName((String) payload.get("username"));
+				user.setLastname((String) payload.get("lastname"));
+				user.setUsername((String) payload.get("username"));
 				user.setPassword(bCryptPasswordEncoder.encode((String) payload.get("password")));
 				user.setBirth_date((String) payload.get("birthDate"));
 				user.setRoles(roles);
@@ -108,8 +108,8 @@ public class UserService implements UserDetailsService {
 		HashMap<String, Object> objectNode = new HashMap<String, Object>();
 		objectNode.put("id", user.getId());
 	    objectNode.put("avatar", user.getAvatar());
-	    objectNode.put("username", user.getUserName());
-	    objectNode.put("lastname", user.getLastName());
+	    objectNode.put("username", user.getUsername());
+	    objectNode.put("lastname", user.getLastname());
 	    objectNode.put("email", user.getEmail());
 	    if(user.getDate() != null) {
 	    	objectNode.put("date", user.getDate().toString().substring(0, 10));

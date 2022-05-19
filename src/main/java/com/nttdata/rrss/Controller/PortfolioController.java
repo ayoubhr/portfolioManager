@@ -38,7 +38,7 @@ public class PortfolioController {
     }
 
     @GetMapping("/find-portfolio-author")
-    public ResponseEntity<PortfolioEntity> findPortfolioByAuthor(@RequestParam Long author) {
+    public ResponseEntity<List<PortfolioEntity>> findPortfolioByAuthor(@RequestParam Long author) {
         return ResponseEntity.ok().body(portfolioService.findPortfolioByAuthor(author));
     }
 

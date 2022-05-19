@@ -61,9 +61,9 @@ public class PortfolioService {
         return portfolio;
     }
 
-    public PortfolioEntity findPortfolioByAuthor(Long author) {
-        Optional<PortfolioEntity> p = portfolioRepository.findByAuthor(author);
-        PortfolioEntity portfolio = p.get();
+    public List<PortfolioEntity> findPortfolioByAuthor(Long author) {
+        Optional<List<PortfolioEntity>> p = portfolioRepository.findByAuthor(author);
+        List<PortfolioEntity> portfolio = p.get();
 
         return portfolio;
     }

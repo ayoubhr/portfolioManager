@@ -50,7 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// portfolio routes
 		http.authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/portfolios/**").hasAnyAuthority("ROLE_USER");
 		http.authorizeHttpRequests().antMatchers(HttpMethod.POST, "/api/portfolios/**").hasAnyAuthority("ROLE_USER");
-		http.authorizeHttpRequests().antMatchers(HttpMethod.DELETE, "/api/portfolios/**").hasAnyAuthority("ROLE_USER");
+		http.authorizeHttpRequests().antMatchers(HttpMethod.DELETE, "/api/portfolios/delete-portfolio").hasAnyAuthority("ROLE_USER");
+		http.authorizeHttpRequests().antMatchers(HttpMethod.DELETE, "/api/portfolios/delete-portfolio-author").hasAnyAuthority("ROLE_ADMIN");
 		
 		// reaction routes
 		http.authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/reactions/**").hasAnyAuthority("ROLE_USER");
