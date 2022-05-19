@@ -43,20 +43,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeHttpRequests().antMatchers("/api/login").permitAll();
 		
 		// user routes
-		http.authorizeHttpRequests().antMatchers(HttpMethod.POST, "/api/users/save-user").permitAll();
-		http.authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/users/find-user").hasAnyAuthority("ROLE_USER");
-		http.authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/users/find-users").hasAnyAuthority("ROLE_USER");
+		http.authorizeHttpRequests().antMatchers(HttpMethod.POST, "/api/v1/users/save-user").permitAll();
+		http.authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/v1/users/find-user").hasAnyAuthority("ROLE_USER");
+		http.authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/v1/users/find-users").hasAnyAuthority("ROLE_USER");
 		
 		// portfolio routes
-		http.authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/portfolios/**").hasAnyAuthority("ROLE_USER");
-		http.authorizeHttpRequests().antMatchers(HttpMethod.POST, "/api/portfolios/**").hasAnyAuthority("ROLE_USER");
-		http.authorizeHttpRequests().antMatchers(HttpMethod.DELETE, "/api/portfolios/delete-portfolio").hasAnyAuthority("ROLE_USER");
-		http.authorizeHttpRequests().antMatchers(HttpMethod.DELETE, "/api/portfolios/delete-portfolio-author").hasAnyAuthority("ROLE_ADMIN");
+		http.authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/v1/portfolios/**").hasAnyAuthority("ROLE_USER");
+		http.authorizeHttpRequests().antMatchers(HttpMethod.POST, "/api/v1/portfolios/**").hasAnyAuthority("ROLE_USER");
+		http.authorizeHttpRequests().antMatchers(HttpMethod.DELETE, "/api/v1/portfolios/delete-portfolio").hasAnyAuthority("ROLE_USER");
+		http.authorizeHttpRequests().antMatchers(HttpMethod.DELETE, "/api/v1/portfolios/delete-portfolio-author").hasAnyAuthority("ROLE_ADMIN");
 		
 		// reaction routes
-		http.authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/reactions/**").hasAnyAuthority("ROLE_USER");
-		http.authorizeHttpRequests().antMatchers(HttpMethod.POST, "/api/reactions/**").hasAnyAuthority("ROLE_USER");
-		http.authorizeHttpRequests().antMatchers(HttpMethod.DELETE, "/api/reactions/**").hasAnyAuthority("ROLE_USER");
+		http.authorizeHttpRequests().antMatchers(HttpMethod.GET, "/api/v1/reactions/**").hasAnyAuthority("ROLE_USER");
+		http.authorizeHttpRequests().antMatchers(HttpMethod.POST, "/api/v1/reactions/**").hasAnyAuthority("ROLE_USER");
+		http.authorizeHttpRequests().antMatchers(HttpMethod.DELETE, "/api/v1/reactions/**").hasAnyAuthority("ROLE_USER");
 		
 		http.authorizeHttpRequests().anyRequest().authenticated();
 		http.addFilter(new CustomAuthFilter(authenticationManagerBean()));

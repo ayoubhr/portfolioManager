@@ -20,7 +20,7 @@ import com.nttdata.rrss.Services.ReactionService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/reactions")
+@RequestMapping("/api/v1/reactions")
 public class ReactionController {
 	
 	private final ReactionService reactionService;

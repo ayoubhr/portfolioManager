@@ -13,7 +13,7 @@ import java.util.Map;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/portfolios")
+@RequestMapping("/api/v1/portfolios")
 public class PortfolioController {
 
     private final PortfolioService portfolioService;
