@@ -41,25 +41,4 @@ public class CustomAuthFilter extends UsernamePasswordAuthenticationFilter{
 		
 		return authenticationManager.authenticate(authenticationToken);
 	}
-
-	// This method creates the access_token once user is authenticated
-	@Override
-	public void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
-			Authentication authentication) throws IOException, ServletException {
-		User user = (User) authentication.getPrincipal();
-		Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
-		String access_token = JWT.create()
-				.withSubject(user.getUsername())
-				.withExpiresAt(new Date(System.currentTimeMillis() + 30 * 60 * 1000))
-				.withIssuer(request.getRequestURL().toString())
-				.withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
-				.sign(algorithm);
-		
-		//response.setHeader("access_token", access_token);
-		HashMap<String, String> token = new HashMap<>();
-		token.put("access_token", access_token);
-		
-		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-		new ObjectMapper().writeValue(response.getOutputStream(), token);
-	}
 }

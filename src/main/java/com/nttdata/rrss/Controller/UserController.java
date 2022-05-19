@@ -64,11 +64,4 @@ public class UserController {
 	public ResponseEntity<List<UserEntity>> getUsers() {
 		return ResponseEntity.ok().body(userService.findUsers());
 	}
-	
-	/* este controlador quizás sobra, o haya otra forma mejor de implementarlo
-	@GetMapping("/addrole")
-	public ResponseEntity<?> addRoleToUser(@RequestBody RoleToUserForm form) {
-		userService.addRoleToUser(form.getEmail(), form.getRoleName());
-		return ResponseEntity.ok().build();
-	}*/
 }
