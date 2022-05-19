@@ -19,7 +19,6 @@ public class PortfolioController {
         this.portfolioService = portfolioService;
     }
 
-    //new Gson().toJsonTree(token)
     @PostMapping("/save-portfolio")
     public ResponseEntity<Object> savePortfolio(@RequestBody Map<String, Object> payload) throws Exception {
         return ResponseEntity.ok().body(portfolioService.savePortfolio(payload));

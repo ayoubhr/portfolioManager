@@ -1,6 +1,5 @@
 package com.nttdata.rrss.Services;
 
-import com.nttdata.rrss.Entity.Composition;
 import com.nttdata.rrss.Entity.PortfolioEntity;
 import com.nttdata.rrss.Repository.PortfolioRepository;
 import org.springframework.stereotype.Service;
@@ -43,8 +42,6 @@ public class PortfolioService {
     public List<PortfolioEntity> findAllPortfolios() {
         List<PortfolioEntity> portfolios = portfolioRepository.findAll();
 
-        // todo
-
         return portfolios;
     }
 
@@ -52,16 +49,12 @@ public class PortfolioService {
         Optional<PortfolioEntity> p = portfolioRepository.findById(id);
         PortfolioEntity portfolio = p.get();
 
-        // todo
-
         return portfolio;
     }
 
     public PortfolioEntity findPortfolioByAuthor(Long author) {
         Optional<PortfolioEntity> p = portfolioRepository.findByAuthor(author);
         PortfolioEntity portfolio = p.get();
-
-        // todo
 
         return portfolio;
     }

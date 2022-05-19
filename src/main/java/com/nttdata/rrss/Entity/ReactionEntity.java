@@ -1,13 +1,16 @@
 package com.nttdata.rrss.Entity;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Data
 @Entity
-@Table(name = "Reactions", schema="rrss_db")
+@Table(name = "Reactions", schema="portfolio-manager")
 public class ReactionEntity {
 
 	@Id
@@ -20,36 +23,6 @@ public class ReactionEntity {
 	
 	private String name;
 
-	public Long getId() {
-		return id;
+	public ReactionEntity() {
 	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getUser() {
-		return user;
-	}
-
-	public void setUser(Long user) {
-		this.user = user;
-	}
-
-	public Long getPublication() {
-		return publication;
-	}
-
-	public void setPublication(Long publication) {
-		this.publication = publication;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	
 }

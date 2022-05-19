@@ -1,10 +1,13 @@
 package com.nttdata.rrss.Entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 
+@Data
 @Entity
-@Table(name = "Portfolio", schema="rrss_db")
+@Table(name = "Portfolio", schema="portfolio-manager")
 public class PortfolioEntity {
 
     @Id
@@ -19,37 +22,5 @@ public class PortfolioEntity {
     private ArrayList composition = new ArrayList();
 
     public PortfolioEntity() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Long author) {
-        this.author = author;
-    }
-
-    public ArrayList getComposition() {
-        return composition;
-    }
-
-    public void setComposition(ArrayList composition) {
-        this.composition = composition;
     }
 }
