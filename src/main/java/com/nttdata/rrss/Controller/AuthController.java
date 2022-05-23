@@ -54,6 +54,6 @@ public class AuthController {
 		token.put("access_token", access_token);
 		token.put("user_id", this.userService.findByEmail(user.getUsername()).getId().toString());
 		
-		 return ResponseEntity.ok().body(new Gson().toJsonTree(token));
+		return ResponseEntity.ok().body(new Gson().toJsonTree(token));
 	}
 }

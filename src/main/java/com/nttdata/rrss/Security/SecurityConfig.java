@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//http.formLogin();
 		
 		// login route
-		http.authorizeHttpRequests().antMatchers("/api/login").permitAll();
+		http.authorizeHttpRequests().antMatchers("/api/v1/login").permitAll();
 		
 		// user routes
 		http.authorizeHttpRequests().antMatchers(HttpMethod.POST, "/api/v1/users/save-user").permitAll();

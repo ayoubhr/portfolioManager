@@ -1,5 +1,6 @@
 package com.nttdata.rrss.Services;
 
+import com.nttdata.rrss.Entity.Composition;
 import com.nttdata.rrss.Entity.PortfolioEntity;
 import com.nttdata.rrss.Entity.ReactionEntity;
 import com.nttdata.rrss.Entity.UserEntity;
@@ -9,6 +10,7 @@ import com.nttdata.rrss.Repository.UserRepository;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 @Service
@@ -28,21 +30,42 @@ public class PortfolioService {
         PortfolioEntity portfolio = new PortfolioEntity();
         HashMap<String, String> response = new HashMap<>();
 
-        try {
-            portfolio.setName((String) payload.get("name"));
-            portfolio.setAuthor(Long.parseLong((String) payload.get("author")));
+        Optional<PortfolioEntity> pe;
+        PortfolioEntity portfolio_existant;
 
-            ArrayList c = (ArrayList) payload.get("composition");
-            portfolio.setComposition(c);
+        if(payload.get("id") != null){
+            //String id_string = String.valueOf();
+            //Long id = Long.parseLong(id_string);
+            Double id = (Double) payload.get("id");
+            pe = portfolioRepository.findById(id.longValue());
+            if(pe.isPresent()){
+                portfolio_existant = pe.get();
+                /*for(int i = 0; i<portfolio_existant.getComposition().length; i++) {
+                    System.out.println(portfolio_existant.getComposition()[i]);
+                }*/
+                //ArrayList<Object> c = (ArrayList<Object>) payload.get("composition");
+                portfolio_existant.setComposition((ArrayList<Object>) payload.get("composition"));
 
-            if(portfolioRepository.save(portfolio) != null) {
-                response.put("status", "portfolio saved");
-            }  else {
-                throw new Exception("Something went wrong");
+                portfolioRepository.deleteById(id.longValue());
+                portfolioRepository.save(portfolio_existant);
+                response.put("status", "portfolio updated");
             }
-        } catch (Exception e) {
-            response.put("403", "Bad Request");
-            response.put("error", e.getMessage());
+        } else {
+            try {
+                System.out.println(payload);
+                portfolio.setName((String) payload.get("name"));
+                portfolio.setAuthor(Long.parseLong((String) payload.get("author")));
+
+                //ArrayList<Object> c = (ArrayList<Object>) payload.get("composition");
+                portfolio.setComposition((ArrayList<Object>) payload.get("composition"));
+
+                portfolioRepository.save(portfolio);
+                response.put("status", "portfolio saved");
+
+            } catch (Exception e) {
+                response.put("403", "Bad Request");
+                response.put("error", e.getMessage());
+            }
         }
 
         return response;
