@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  db:
+    image: mariadb:10.4.22
+    container_name: mariadb
+    ports:
+      - "3308:3306"
+    networks:
+      - portmanager-app
+    environment:
+      MYSQL_DATABASE: 'portfolio-manager'
+      MYSQL_USER: 'root'
+
+  docker-portmanager:
+    image: docker-portmanager:0.0.1
+    container_name: portmanager
+    ports:
+      - "8080:8080"
+    networks:
+      - portmanager-app
+    depends_on:
+      - db
+networks:
+  portmanager-app:
