@@ -7,6 +7,7 @@
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.1
 
+SET SQL_REQUIRE_PRIMARY_KEY = OFF;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -18,10 +19,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `portfolio-manager`
+-- Base de datos: `portdb`
 --
-CREATE DATABASE IF NOT EXISTS `portfolio-manager` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `portfolio-manager`;
+CREATE DATABASE IF NOT EXISTS `portdb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `portdb`;
 
 -- --------------------------------------------------------
 
@@ -30,7 +31,7 @@ USE `portfolio-manager`;
 --
 
 CREATE TABLE `hibernate_sequence` (
-  `next_not_cached_value` bigint(21) NOT NULL,
+  `next_val` bigint(21) NOT NULL,
   `minimum_value` bigint(21) NOT NULL,
   `maximum_value` bigint(21) NOT NULL,
   `start_value` bigint(21) NOT NULL COMMENT 'start value when sequences is created or value if RESTART is used',
@@ -44,7 +45,7 @@ CREATE TABLE `hibernate_sequence` (
 -- Volcado de datos para la tabla `hibernate_sequence`
 --
 
-INSERT INTO `hibernate_sequence` (`next_not_cached_value`, `minimum_value`, `maximum_value`, `start_value`, `increment`, `cache_size`, `cycle_option`, `cycle_count`) VALUES
+INSERT INTO `hibernate_sequence` (`next_val`, `minimum_value`, `maximum_value`, `start_value`, `increment`, `cache_size`, `cycle_option`, `cycle_count`) VALUES
 (1001, 1, 9223372036854775806, 1, 1, 1000, 0, 0);
 
 -- --------------------------------------------------------
@@ -57,7 +58,8 @@ CREATE TABLE `portfolios` (
   `id` bigint(20) NOT NULL,
   `author` bigint(20) DEFAULT NULL,
   `composition` longblob DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL
+  `name` varchar(255) DEFAULT NULL,
+   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -70,7 +72,8 @@ CREATE TABLE `reactions` (
   `id` bigint(20) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `publication` bigint(20) DEFAULT NULL,
-  `user` bigint(20) DEFAULT NULL
+  `user` bigint(20) DEFAULT NULL,
+   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -81,7 +84,8 @@ CREATE TABLE `reactions` (
 
 CREATE TABLE `roles` (
   `id` bigint(20) NOT NULL,
-  `name` varchar(255) DEFAULT NULL
+  `name` varchar(255) DEFAULT NULL,
+   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -106,7 +110,8 @@ CREATE TABLE `user` (
   `email` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL
+  `username` varchar(255) NOT NULL,
+   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -125,28 +130,9 @@ CREATE TABLE `user_roles` (
 --
 
 --
--- Indices de la tabla `portfolios`
---
-ALTER TABLE `portfolios`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `reactions`
---
-ALTER TABLE `reactions`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `roles`
---
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UK_ob8kqyqqgmefl0aco34akdtpe` (`email`);
 
 --
