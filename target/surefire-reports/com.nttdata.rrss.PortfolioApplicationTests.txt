@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.nttdata.rrss.PortfolioApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.598 s - in com.nttdata.rrss.PortfolioApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 15.985 s - in com.nttdata.rrss.PortfolioApplicationTests
