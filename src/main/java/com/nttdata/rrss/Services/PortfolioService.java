@@ -6,7 +6,6 @@ import com.nttdata.rrss.Entity.UserEntity;
 import com.nttdata.rrss.Repository.PortfolioRepository;
 import com.nttdata.rrss.Repository.ReactionRepository;
 import com.nttdata.rrss.Repository.UserRepository;
-import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -24,7 +23,7 @@ public class PortfolioService {
         this.reactionRepository = reactionRepository;
     }
 
-    public HashMap<String, String> savePortfolio(Map<String, Object> payload) throws Exception {
+    public HashMap<String, String> savePortfolio(Map<String, Object> payload) {
         PortfolioEntity portfolio = new PortfolioEntity();
         HashMap<String, String> response = new HashMap<>();
 
@@ -90,7 +89,7 @@ public class PortfolioService {
         portfolioRepository.deleteByAuthor(author);
     }
 
-    public List<Object> portfolioReactions(Long id) throws JSONException {
+    public List<Object> portfolioReactions(Long id) {
         Optional<UserEntity> u = userRepository.findById(id);
         UserEntity user = u.get();
 

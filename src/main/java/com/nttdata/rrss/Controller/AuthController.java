@@ -35,10 +35,11 @@ public class AuthController {
 
 	@CrossOrigin(origins = "*")
 	@PostMapping(value = "/api/v1/login")
-	public ResponseEntity<JsonElement> login(@RequestBody HashMap<String, String> httpEntity, HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException {
+	public ResponseEntity<JsonElement> login(@RequestBody HashMap<String, String> httpEntity, HttpServletRequest request, HttpServletResponse response) {
 
-		JSONObject object = new JSONObject(httpEntity);
-		String email = object.getString("username");
+		//JSONObject object = new JSONObject(httpEntity);
+		//String email = object.getString("username");
+		String email = httpEntity.get("username");
 
 		User user = (User) userService.loadUserByUsername(email);
 		

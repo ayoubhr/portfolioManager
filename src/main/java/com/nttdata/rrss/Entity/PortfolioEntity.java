@@ -1,12 +1,10 @@
 package com.nttdata.rrss.Entity;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 
 @Entity
-@Table(name = "portfolios", schema = "portfolio-manager")
+@Table(name = "portfolios", schema = "portdb")
 public class PortfolioEntity {
 
     @Id

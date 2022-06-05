@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.nttdata.rrss.Entity.PortfolioEntity;
 import com.nttdata.rrss.Services.PortfolioService;
-import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,7 +54,7 @@ public class PortfolioController {
     }
 
     @GetMapping("/find-portfolio-reactions")
-    public ResponseEntity<JsonElement> findPublicationObjects(@RequestParam Long id) throws JSONException {
+    public ResponseEntity<JsonElement> findPublicationObjects(@RequestParam Long id) {
         return ResponseEntity.ok().body(new Gson().toJsonTree(portfolioService.portfolioReactions(id)));
     }
 }
