@@ -34,21 +34,21 @@ public class UserController {
 	}
 	
 	@PostMapping("/save-user")
-	public ResponseEntity<JsonElement> saveUser(@RequestBody Map<String, Object> payload) throws Exception {
+	public ResponseEntity<JsonElement> saveUser(@RequestBody Map<String, Object> payload) {
 		URI uri = URI.create(
 				ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/users/save-user").toUriString());
 		return ResponseEntity.created(uri).body(new Gson().toJsonTree(userService.saveUser(payload)));
 	}
 	
 	@PutMapping("/edit-user-email")
-	public ResponseEntity<JsonElement> editUserEmail(@RequestBody Map<String, Object> payload) throws Exception {
+	public ResponseEntity<JsonElement> editUserEmail(@RequestBody Map<String, Object> payload) {
 		URI uri = URI.create(
 				ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/users/edit-user-email").toUriString());
 		return ResponseEntity.created(uri).body(new Gson().toJsonTree(userService.editUserEmail(payload)));
 	}
 	
 	@PutMapping("/edit-user-avatar")
-	public ResponseEntity<JsonElement> editUserAvatar(@RequestBody Map<String, Object> payload) throws Exception {
+	public ResponseEntity<JsonElement> editUserAvatar(@RequestBody Map<String, Object> payload) {
 		URI uri = URI.create(
 				ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/users/edit-user-avatar").toUriString());
 		return ResponseEntity.created(uri).body(new Gson().toJsonTree(userService.editUserAvatar(payload)));

@@ -24,7 +24,7 @@ public class PortfolioService {
         this.reactionRepository = reactionRepository;
     }
 
-    public HashMap<String, String> savePortfolio(Map<String, Object> payload) throws Exception {
+    public HashMap<String, String> savePortfolio(Map<String, Object> payload) {
         PortfolioEntity portfolio = new PortfolioEntity();
         HashMap<String, String> response = new HashMap<>();
 
@@ -63,22 +63,26 @@ public class PortfolioService {
     }
 
     public List<PortfolioEntity> findAllPortfolios() {
-        List<PortfolioEntity> portfolios = portfolioRepository.findAll();
-
-        return portfolios;
+        return portfolioRepository.findAll();
     }
 
     public PortfolioEntity findPortfolio(Long id) {
         Optional<PortfolioEntity> p = portfolioRepository.findById(id);
-        PortfolioEntity portfolio = p.get();
+        PortfolioEntity portfolio = new PortfolioEntity();
 
+        if(p.isPresent()) {
+            portfolio = p.get();
+        }
         return portfolio;
     }
 
     public List<PortfolioEntity> findPortfolioByAuthor(Long author) {
         Optional<List<PortfolioEntity>> p = portfolioRepository.findByAuthor(author);
-        List<PortfolioEntity> portfolio = p.get();
+        List<PortfolioEntity> portfolio = null;
 
+        if(p.isPresent()) {
+            portfolio = p.get();
+        }
         return portfolio;
     }
 
@@ -99,7 +103,7 @@ public class PortfolioService {
         List<Object> objList = new ArrayList<>();
 
         for(PortfolioEntity port: ports) {
-            HashMap<String, Object> objectNode = new HashMap<String, Object>();
+            HashMap<String, Object> objectNode = new HashMap<>();
 
             List<ReactionEntity> reactions = reactionRepository.findByUserAndPublication(id, port.getId());
 
